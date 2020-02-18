@@ -2,8 +2,7 @@ from flask import Flask
 from flask import Flask, jsonify, request, make_response, url_for, redirect, render_template, session
 import datetime
 import pymysql
-import requests
-from bs4 import BeautifulSoup
+
 
 app = Flask(__name__, static_url_path = "")
 app.config['SECRET_KEY'] = '123456'
