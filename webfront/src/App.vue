@@ -1,0 +1,130 @@
+<template>
+  <div id="app">
+    <transition :name="transitionName">
+      <keep-alive>
+        <router-view></router-view>
+      </keep-alive>
+    </transition>
+  </div>
+</template>
+
+<script>
+export default {
+  name: 'App',
+  data(){
+    return {
+      transitionName:''
+    }
+  },
+  watch: {
+    $route (to, from) {
+      if (to.meta.index > from.meta.index) {
+        this.transitionName = 'slide-left'
+      } else {
+        this.transitionName = 'slide-right'
+      }
+    }
+  }
+
+}
+</script>
+
+<style>
+  @keyframes slideInLeft {
+    from {
+      transform: translate3d(100%, 0, 0);
+      position: fixed;
+      top: 0;
+      left: 0;
+      opacity: 1;
+    }
+    to {
+      transform: translate3d(0, 0, 0);
+      position: fixed;
+      top: 0;
+      left: 0;
+      opacity: 1;
+    }
+  }
+  @keyframes slideInRight {
+    from {
+      transform: translate3d(0%, 0, 0);
+      position: fixed;
+      top: 0;
+      left: 0;
+      opacity: 1;
+    }
+    to {
+      transform: translate3d(-100%, 0, 0);
+      position: fixed;
+      top: 0;
+      left: 0;
+      opacity: 1;
+    }
+  }
+  .slide-left-enter-active{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    animation: slideInLeft .4s linear forwards;
+  }
+  .slide-left-leave-active{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    animation: slideInRight .4s linear forwards;
+  }
+  /*向右滑动*/
+  @keyframes slideOutLeft {
+    from {
+      transform: translate3d(-100%, 0, 0);
+      position: fixed;
+      top: 0;
+      left: 0;
+      opacity: 1;
+    }
+    to {
+      transform: translate3d(0%, 0, 0);
+      position: fixed;
+      top: 0;
+      left: 0;
+      opacity: 1;
+    }
+  }
+  @keyframes slideOutRight {
+    from {
+      transform: translate3d(0%, 0, 0);
+      position: fixed;
+      top: 0;
+      left: 0;
+      opacity: 1;
+    }
+    to {
+      transform: translate3d(100%, 0, 0);
+      position: fixed;
+      top: 0;
+      left: 0;
+      opacity: 1;
+    }
+  }
+  .slide-right-enter-active{
+    position: fixed;
+    top: 0;
+    left: 0%;
+    width: 100vw;
+    height: 100vh;
+    animation: slideOutLeft .4s linear forwards;
+  }
+  .slide-right-leave-active{
+    position: fixed;
+    top: 0;
+    left: 0%;
+    width: 100vw;
+    height: 100vh;
+    animation: slideOutRight .4s linear forwards;
+  }
+</style>
