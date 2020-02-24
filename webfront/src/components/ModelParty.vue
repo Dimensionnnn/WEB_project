@@ -4,7 +4,7 @@
     <div class="id-banner">
       <div class="id-banner-box">
         <div class="id-banner-rap">
-          <img class="backgroud-picture" src="../assets/picture/party-title.png">
+          <img class="backgroud-picture" src="/static/picture/party-title.png">
         </div>
       </div>
     </div>
@@ -237,76 +237,16 @@
       data(){
         return {
           textarea:'',
-          banner:[
-            {url:require('../assets/picture/模范党支部/外语学院第三党支部.jpg'),title:'外语学院教工第三党支部',content:'我了才能是那次你收到了磁轭辽宁卫视近年来ID拿出来的时拿出来哪里你是吃了啥南陈路'},
-            {url:require('../assets/picture/模范党支部/理学院化学实验中心.jpg'), title:'理学院化学实验中心党支部',content:'课程的是你擦地来收到了年底深V你熟练度呢猥琐男另外你为了你历五年了那算了我你老是'},
-            {url:require('../assets/picture/模范党支部/计院智科.jpg'),title:'计算机工程与科学学院智能科学与技术系第一党支部',content:'会查理斯哦长时间hi殴打欧神诺我哦哦我John哦以殴打偶极矩到都欧迪芬京东'},
-            {url:require('../assets/picture/模范党支部/机自工训中心.jpg'),title:'机电工程与自动化学院工程训练中心党总支',content:'回款表科技板块hihike开 看固顾客顾客会快不快好看包括和U包括和UK好包括和库顾客'},
-            {url:require('../assets/picture/模范党支部/材料学院材料研究所.jpg'),title:'材料科学与工程学院材料研究所党总支',content:'互不开很酷很酷库个课号贵一顾客hi课号根据胡歌蠢花括号固看个可好看法国苦海个看个看看'},
-            {url:require('../assets/picture/模范党支部/通信特种光纤.jpg'),title:'通信与信息工程学院特征光纤与光接入网党总支',content:'还客户开会给hi后个u花开花落u9of挺好 返回寄顾客匞就看个开顾客好看顾客活力固课号个了'},
-            {url:require('../assets/picture/模范党支部/经济学院金融系.jpg'),title:'经济学院金融系教工党总支',content:'汇款户口课号活力里hi考虑好里活力hi干部科 一里hi空白课号不顾看吧OKhoist不课号了hike户口包括会列表'},
-            {url:require('../assets/picture/模范党支部/数码艺术学院.jpg'),title:'数码艺术学院2015级学生党支部',content:'数码艺术学院2015级学生党支部是一支与时俱进、乐于奉献、开拓创新、团结协作的基层党组织，是一个温馨的大家庭。所有党员在学校、学院的人才培养工作中充分发挥先锋模范和战斗堡垒作用'}
-          ],
-          news:[[{title:'> 中央不忘初心，牢记使命主题教育领导小组印发通知,认真学习贯彻习近平总书记....'},
-                  {title:'> 习近平在"不忘初心，牢记使命"大会上的讲话'},
-                  {title:'> 习近平：以主题教育为新的起点 持续推动全党不忘初心，牢记使命'},
-                  {title:'> 中共中央政治局常务委员会召开会议，习近平主持'},
-                  {title:'> 以高质量党建推动国有企业高质量发展'}],
-            [{title:'> 评论员观察:全面从严治党，凝聚磅礴伟力'},
-              {title:'> 人民日报评论员:发扬斗争精神，用于担当作为'},
-              {title:'> 人民日报评论员：强大的政党是在自我革命中锻炼出来的'},
-              {title:'> 人民日报评论员:把学习贯彻党的创新理论作为思想武装的重中之重'},
-              {title:'> 党建评:永恒课题需要永远解答'}
-            ],
-            [{title:'> 治理者说:擦亮基层群众的幸福底色'},
-              {title:'> 治理之道:把不忘初心，牢记使命作为终身课题'},
-              {title:'> 一线思考:扎紧乡村检查监督的“篱笆”'},
-              {title:'> 让初心始终闪耀'},
-              {title:'> 治理者说:以务实创新激发治理效能'}],
-            [{title:'> 湖南省三下乡:将惠民服务送到老乡家门口'},
-              {title:'> 山东省淄博市淄川区探索流动党员教育管理实践路径'},
-              {title:'> 贵州遵义立足资源优势，探索构建红色文化育人体系'},
-              {title:'> 党建引领促脱贫'},
-              {title:'> “支部引领-村社合一”壮大村级集体经济'}],
-            [{title:'> 以新金融履践初心使命锻造政治忠诚'},
-              {title:'> 发挥党建引领作用'},
-              {title:'> 哈尔滨工程大学:传承红色基因，铸就国家栋梁'},
-              {title:'> 一线行走:只做小事儿的“老郭”'},
-              {title:'> 减负不减责，见效盼长效'}]
-          ],
-          partymember:[
-            {url:require('../assets/picture/优秀党员/毛雪峰.jpg'), title:'毛雪峰'},
-            {url:require('../assets/picture/优秀党员/沈文枫.jpg'), title:'沈文枫'},
-            {url:require('../assets/picture/优秀党员/叶飞跃.jpg'), title:'叶飞跃'},
-            {url:require('../assets/picture/优秀党员/姜颖.jpg'), title:'姜颖'},
-            {url:require('../assets/picture/优秀党员/梁霞.jpg'), title:'梁霞'},
-            {url:require('../assets/picture/优秀党员/冯玉鑫.jpg'),title:'冯玉鑫'},
-            {url:require('../assets/picture/优秀党员/林自强.jpg'), title:'林自强'},
-            {url:require('../assets/picture/优秀党员/王武荣.jpeg'),title:'王武荣'}
-          ],
-          xinajinshiji:[
-            {title:'邓志瑞：用欣赏和爱托起一片蓝天，培育好每一个学生'},
-            {title:'钟杨：做牢记使命的奋斗者，鞠躬尽瘁，死而后已'},
-            {title:'李友梅：立足大地，不懈耕耘'},
-            {title:'张统一：在改革的新时代号角中弘扬科学家精神'},
-            {title:'张建华：培育科技创新人才，凝聚团队科研精神'},
-            {title:'陈青：育人为先，创新探索'}
-          ],
+          banner:[],
+          news:[[],[],[],[],[]],
+          partymember:[],
+          xinajinshiji:[],
           xianjinbanner:[
-            {title:'学习路上',url:require('../assets/picture/activity_banner1.png'),content:'习总书记系列讲话'},
-            {title:'学习有声',url:require('../assets/picture/activity_banner2.png'),content:'习总书记经典语录'},
-            {title:'学习金句',url:require('../assets/picture/activity_banner3.png'),content:'习总书记重要论述'}
+            {title:'学习路上',url:'/static/picture/activity_banner1.png',content:'习总书记系列讲话'},
+            {title:'学习有声',url:'/static/picture/activity_banner2.png',content:'习总书记经典语录'},
+            {title:'学习金句',url:'/static/picture/activity_banner3.png',content:'习总书记重要论述'}
           ],
-          comment:[
-            {name:'李梅梅',content:'不忘初心，砥砺前行！'},
-            {name:'朱正涛',content:'同志们一起努力，吧我国建设策划归纳为富强民主文明和谐美丽的社会主义现代化强国'},
-            {name:'李嘉瑞',content:'向前辈们学习，吾辈当自强'},
-            {name:'周树立',content:'做好本职工作，为中国梦而奋斗'},
-            {name:'秦水生',content:'让生活更美好，让国家更富强'},
-            {name:'陈秋安',content:'撸起袖子加油干！'},
-            {name:'李安琪',content:'生为华夏人而自豪'},
-            {name:'刘书瑞',content:'加油加油！空谈误国，实干兴邦'}
-          ]
+          comment:[]
         }
       },
       methods:{
@@ -362,10 +302,98 @@
           $(".notice-title-body1").css('display','block');
           $(".border1").css('background','#0477c5');
           $(".border1 span").css({'color':'#fff','font-weight':'bold'})
+        },
+        init_Model_Party:function () {
+          let that = this;
+          this.$axios.post('api/org').then(function (res) {
+            let content = res.data.data;
+            for (let i=0; i<content.length; i++){
+              let dict = {};
+              dict['url'] = content[i][0];
+              dict['title'] = content[i][1];
+              dict['content'] = content[i][2];
+              that.banner.push(dict)
+            }
+          })
+        },
+        init_News_Title:function () {
+          let that = this;
+          this.$axios.post('api/orgnews').then(function (res) {
+            let content = res.data.data;
+            for (let i=0; i<content.length; i++){
+              if (content[i][1] === 1){
+                let dict = {};
+                dict['title'] = '> '+content[i][0];
+                that.news[0].push(dict)
+              }
+              else if (content[i][1] === 2){
+                let dict = {};
+                dict['title'] = '> '+content[i][0];
+                that.news[1].push(dict)
+              }
+              else if (content[i][1] === 3){
+                let dict = {};
+                dict['title'] = '> '+content[i][0];
+                that.news[2].push(dict)
+              }
+              else if (content[i][1] === 4){
+                let dict = {};
+                dict['title'] = '> '+content[i][0];
+                that.news[3].push(dict)
+              }
+              else{
+                let dict = {};
+                dict['title'] = '> '+content[i][0];
+                that.news[4].push(dict)
+              }
+            }
+          })
+        },
+        init_Partymember:function () {
+          let that = this;
+          this.$axios.post('api/partymember').then(function (res) {
+            let content = res.data.data;
+            for (let i=0; i<content.length; i++){
+              let dict = {};
+              dict['url'] = content[i][0];
+              dict['title'] = content[i][1];
+              that.partymember.push(dict)
+            }
+          })
+        },
+        init_Good_Thing:function () {
+          let that = this;
+          this.$axios.post('api/goodthing').then(function (res) {
+            let content = res.data.data;
+            for (let i=0; i<content.length; i++){
+              let dict = {};
+              dict['title'] = content[i][0];
+              that.xinajinshiji.push(dict)
+            }
+          })
+        },
+        init_comment:function () {
+          let that = this;
+          this.$axios.post('api/party_comment').then(function (res) {
+            let content = res.data.data;
+            for (let i=0; i<content.length; i++){
+              let dict = {};
+              dict['name'] = content[i][0];
+              dict['content'] = content[i][1];
+              that.comment.push(dict)
+            }
+          })
         }
       },
       mounted() {
         this.initClass()
+      },
+      created() {
+        this.init_Model_Party();
+        this.init_News_Title();
+        this.init_Partymember();
+        this.init_Good_Thing();
+        this.init_comment()
       }
     }
 </script>
@@ -377,7 +405,7 @@
     z-index: 1;
     width: 100%;
     height: 250px;
-    background: url("../assets/picture/party_background.jpg") no-repeat;
+    background: url("/static/picture/party_background.jpg") no-repeat;
     background-size: 100% 100%;
   }
   .id-banner-box{
@@ -469,7 +497,7 @@
     text-decoration: none;
   }
   .focus-nav .list1 i{
-    background: url("../assets/picture/picture.png") no-repeat center center;
+    background: url("/static/picture/picture.png") no-repeat center center;
     background-size: cover;
     width: 26px;
     height: 26px;
@@ -477,7 +505,7 @@
     margin-top: 13px;
   }
   .focus-nav .list2 i{
-    background: url("../assets/picture/video.png") no-repeat center center;
+    background: url("/static/picture/video.png") no-repeat center center;
     background-size: cover;
     width: 26px;
     height: 26px;
@@ -588,7 +616,7 @@
     position: relative;
     width: 1200px;
     height: 110px;
-    background: url("../assets/picture/party-banner.jpg") no-repeat center center;
+    background: url("/static/picture/party-banner.jpg") no-repeat center center;
     background-size: cover;
     cursor: pointer;
   }

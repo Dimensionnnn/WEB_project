@@ -4,8 +4,9 @@ import datetime
 import pymysql
 
 
-app = Flask(__name__, static_url_path = "")
+app = Flask(__name__, static_url_path="")
 app.config['SECRET_KEY'] = '123456'
+
 
 @app.route('/')
 def hello_world():
@@ -44,35 +45,43 @@ def login():
         return jsonify(errno='notok', errmsg="用户数据读取失败")
 
 
+# 读取新闻标题
+@app.route('/news/outline', methods=['get', 'post'])
+def get_news_outline():
+    try:
+        with DB() as db:
+            sql = 'select * from news_outline'
+            db.execute(sql)
+            data = db.fetchall()
+            return jsonify(errno='suceess', errmsg='获取成功', data=data)
+    except Exception as e:
+        return jsonify(error='error', errmsg='获取失败', data=e)
+
+
+# 读取新闻图片
+@app.route('/header/banner', methods=['get', 'post'])
+def get_header_banner():
+    try:
+        with DB() as db:
+            sql = "select * from header_banner"
+            db.execute(sql)
+            data = db.fetchall()
+            return jsonify(errno='success', errmsg='获取成功', data=data)
+    except Exception as e:
+        return jsonify(error='error', errmsg='获取失败', data=e)
+
 
 # 提供新闻轮播图、新闻标题显示
-@app.route('/news/banner', methods=['get','post'])
+@app.route('/news/banner', methods=['get', 'post'])
 def getimg():
     try:
         with DB() as db:
-            sql = 'SELECT imgurl,title FROM news'
+            sql = 'SELECT * FROM news'
             db.execute(sql)
             data = db.fetchall()
-            print(data)
             return jsonify(errno='ok', errmsg="获取成功", data=data)
     except Exception as e:
-        print(e)
-        return jsonify(errno='notok', errmsg="用户数据读取失败")
-
-
-#  提供高层动态新闻梗概
-@app.route('/news/outline', methods=['get', 'post'])
-def getoutline():
-    try:
-        with DB() as db:
-            sql = 'SELECT outline FROM news'
-            db.execute(sql)
-            data = db.fetchall()
-            print(data)
-            return jsonify(errno='ok', errmsg="获取成功", data=data)
-    except Exception as e:
-        print(e)
-        return jsonify(errno='notok', errmsg="用户数据读取失败")
+        return jsonify(errno='notok', errmsg="用户数据读取失败", data=e)
 
 
 # 提供特别活动card的imgurl、text、content 图片、标题、简介
@@ -80,32 +89,29 @@ def getoutline():
 def getactcard():
     try:
         with DB() as db:
-            sql = 'SELECT imgurl,title,content FROM activity'
+            sql = 'SELECT url,text,content FROM activity'
             db.execute(sql)
             data = db.fetchall()
-            print(data)
             return jsonify(errno='ok', errmsg="获取成功", data=data)
     except Exception as e:
-        print(e)
-        return jsonify(errno='notok', errmsg="用户数据读取失败")
+        return jsonify(errno='notok', errmsg="用户数据读取失败", data=e)
 
 
 # 积分，具体计算方法？
-@app.route('/grade')
+@app.route('/credit', methods=['get', 'post'])
 def grade():
-    json_data = request.json                            # 获取页面输入的数据
-    id= json_data.get("id")
+    # json_data = request.json                            # 获取页面输入的数据
+    # id= json_data.get("id")
+    id='1001'
     try:
         with DB() as db:
-            sql = 'SELECT activity_hours,study_hours FROM user WHERE id = %s' % id
+            sql = 'SELECT study_hour, act_hour, credit FROM user where userId="%s"' % id
             db.execute(sql)
-            data = db.fetchone()
-            print(data)
-            grade = data[0]*2+data[1]*3
-            return jsonify(errno='ok', errmsg="获取成功", data=data, grade=grade)
+            data = db.fetchall()
+            return jsonify(errno='ok', errmsg="获取成功", data=data)
     except Exception as e:
         print(e)
-        return jsonify(errno='notok', errmsg="用户数据读取失败")
+        return jsonify(errno='notok', errmsg="用户数据读取失败", data=e)
 
 
 # #  从党建网爬取新闻录入数据库,未完善,需讨论。按tag分类四个。
@@ -151,90 +157,113 @@ def grade():
 #     return titlelist
 
 # 外交足迹页面 提供城市名称、经纬度
-@app.route('/map', methods=['get','post'])
+@app.route('/map', methods=['get', 'post'])
 def map():
     try:
         with DB() as db:
-            sql = 'SELECT * FROM map'
+            sql = 'SELECT * FROM diplomat'
             db.execute(sql)
             data = db.fetchall()
-            print(data)
             return jsonify(errno='ok', errmsg="获取成功", data=data)
     except Exception as e:
-        print(e)
-        return jsonify(errno='notok', errmsg="用户数据读取失败")
+        return jsonify(errno='notok', errmsg="用户数据读取失败", data=e)
 
 
 # 前辈寄语，以tag分类,tag编写需商讨
-@app.route('/older',methods=['get','post'])
+@app.route('/older', methods=['get', 'post'])
 def older():
     try:
         with DB() as db:
-            sql = 'SELECT * FROM older'
+            sql = 'SELECT * FROM model_people'
             db.execute(sql)
             data = db.fetchall()
-            print(data)
             return jsonify(errno='ok', errmsg="获取成功", data=data)
     except Exception as e:
-        print(e)
-        return jsonify(errno='notok', errmsg="用户数据读取失败")
+        return jsonify(errno='notok', errmsg="用户数据读取失败", data=e)
 
 
 # 优秀党支部图片及党支部名称,轮播图放
-@app.route('/org',methods=['post','get'])
+@app.route('/org', methods=['post', 'get'])
 def getorg():
     try:
         with DB() as db:
-            sql = 'SELECT * FROM org'
+            sql = 'SELECT * FROM model_party'
             db.execute(sql)
             data = db.fetchall()
-            print(data)
             return jsonify(errno='ok', errmsg="获取成功", data=data)
     except Exception as e:
-        print(e)
-        return jsonify(errno='notok', errmsg="用户数据读取失败")
+        return jsonify(errno='notok', errmsg="用户数据读取失败", data=e)
 
 
 # 提供党支部界面的新闻标题,以tag分类
-@app.route('/orgnews', methods=['post','get'])
+@app.route('/orgnews', methods=['post', 'get'])
 def getorgnews():
     try:
         with DB() as db:
-            sql = 'SELECT title,tag FROM orgnews'
+            sql = 'SELECT * FROM model_party_news'
             db.execute(sql)
             data = db.fetchall()
-            print(data)
             return jsonify(errno='ok', errmsg="获取成功", data=data)
     except Exception as e:
-        print(e)
-        return jsonify(errno='notok', errmsg="用户数据读取失败")
+        return jsonify(errno='notok', errmsg="用户数据读取失败", data=e)
 
 
-# 点击获取具体内容
-@app.route('/orgnews/in',methods=['post','get'])
-def getcontent():
-    json_data = request.json                            # 获取页面输入的数据
-    id= json_data.get("newsid")
+# 获取优秀党员
+@app.route('/partymember', methods=['get', 'post'])
+def partymember():
     try:
         with DB() as db:
-            sql = 'SELECT * FROM orgnews WHERE newsid = %s ' % id
+            sql = 'SELECT * FROM good_party_member'
             db.execute(sql)
-            data = db.fetchone()
-            print(data)
-            return jsonify(errno='ok', errmsg="获取成功", data=data)
+            data = db.fetchall()
+            return jsonify(errno='success', errmsg='获取成功', data=data)
     except Exception as e:
-        print(e)
-        return jsonify(errno='notok', errmsg="用户数据读取失败")
+        return jsonify(errno='notok', errmsg="用户数据读取失败", data=e)
 
 
+# 获取优秀事迹
+@app.route('/goodthing', methods=['get', 'post'])
+def good_thing():
+    try:
+        with DB() as db:
+            sql = 'SELECT * FROM good_thing'
+            db.execute(sql)
+            data = db.fetchall()
+            return jsonify(errno='success', errmsg='获取成功', data=data)
+    except Exception as e:
+        return jsonify(errno='notok', errmsg="用户数据读取失败", data=e)
 
 
+# 获取精选评论
+@app.route('/party_comment', methods=['get', 'post'])
+def party_commment():
+    try:
+        with DB() as db:
+            sql = 'SELECT * FROM party_comment'
+            db.execute(sql)
+            data = db.fetchall()
+            return jsonify(errno='success', errmsg='获取成功', data=data)
+    except Exception as e:
+        return jsonify(errno='notok', errmsg="用户数据读取失败", data=e)
+
+
+# 获取组织生活窗数据
+@app.route('/window', methods=['get', 'post'])
+def window():
+    try:
+        with DB() as db:
+            sql = 'SELECT * FROM window_visit'
+            db.execute(sql)
+            data = db.fetchall()
+            return jsonify(errno='success', errmsg='获取成功', data=data)
+    except Exception as e:
+        return jsonify(errno='notok', errmsg="用户数据读取失败", data=e)
 
 
 class DB(object):
     def __init__(self):
-        self.conn = pymysql.connect(host="cdb-evw36b72.cd.tencentcdb.com", port=10071, user="root",
-                                    password="wf1999wf",
+        self.conn = pymysql.connect(host="127.0.0.1", port=3306, user="root",
+                                    password="123456",
                                     database="godj")
         self.cursor = self.conn.cursor()
         # self.num = self.cos.execute()

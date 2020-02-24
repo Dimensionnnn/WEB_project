@@ -2,9 +2,9 @@
     <div id="sp-header">
       <div class="header-wrapper">
         <div class="header-left">
-          <img src="../assets/picture/logo-left.png" class="logo-left">
+          <img src="/static/picture/logo-left.png" class="logo-left">
           <div class="header-search">
-            <img class="i-search" src="../assets/picture/search.png">
+            <img class="i-search" src="/static/picture/search.png">
             <input class="input-search" placeholder="输入您想要搜索的内容"></input>
             <div class="btn-search">搜索</div>
           </div>

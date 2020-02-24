@@ -8,22 +8,8 @@
         data(){
           return{
             loadingState:true,
-            geoCoordMap:{
-              '北京':[116.607,39.904],
-              '罗马':[13.361,38.117],
-              '摩纳哥':[7.421,43.737],
-              '尼斯':[2.353,48.857],
-              '莫斯科':[30.332,59.937],
-              '比什凯克':[74.569,42.877],
-              '杜尚别':[68.780,38.563],
-              '平壤':[125.762,39.037],
-              '大阪':[135.498,34.671],
-              '金奈':[80.267,13.077],
-              '加德满都':[85.320,27.720],
-              '雅典':[23.727,37.984],
-              '巴西利亚':[-47.891,-15.789],
-              '特内里费岛':[-16.259,28.486]
-            },
+            geoCoordMap:{},
+            BJData:[],
             series: [],
             dser: []
           }
@@ -44,23 +30,7 @@
           },
           Init_map:function(){
             var that = this;
-            var BJData = [
-              [{name: '北京'}, {name: "罗马",value: 100}],
-              [{name: '北京'}, {name: "摩纳哥",value: 100}],
-              [{name: '北京'}, {name: "尼斯",value: 100}],
-              [{name: '北京'}, {name: "莫斯科",value: 100}],
-              [{name: '北京'}, {name: "比什凯克",value: 100}],
-              [{name: '北京'}, {name: "杜尚别",value: 100}],
-              [{name: '北京'}, {name: "平壤",value: 100}],
-              [{name: '北京'}, {name: "大阪",value: 100}],
-              [{name: '北京'}, {name: "金奈",value: 100}],
-              [{name: '北京'}, {name: "加德满都",value: 100}],
-              [{name: '北京'}, {name: "雅典",value: 100}],
-              [{name: '北京'}, {name: "巴西利亚",value: 100}],
-              [{name: '北京'}, {name: "特里菲群岛",value: 100}]
-            ];
-
-            [['北京', BJData]].forEach(function(item, i) {
+            [['北京', that.BJData]].forEach(function(item, i) {
                 that.dser.push({
                 type: 'effectScatter',
                 coordinateSystem: 'geo',
@@ -185,7 +155,7 @@
                   top: 'middle',
                   left: 'center',
                   displacementScale: 0,
-                  environment:require('../assets/picture/starfield.jpg'),
+                  environment:'/static/picture/starfield.jpg',
                   shading: 'color',
                   viewControl: {
                       distance:240,
@@ -202,7 +172,23 @@
         }
       },
       mounted() {
-          this.Init_Graph();
+
+      },
+      created() {
+          let that = this;
+          this.$axios.post('api/map').then(function (res) {
+            let positions = res.data.data;
+            for (let i=0; i<positions.length; i++){
+              if (positions[i][0] !== '北京'){
+                let list = [];
+                list.push({name: '北京'});
+                list.push({name: positions[i][0], value: 100});
+                that.BJData.push(list)
+              }
+              that.geoCoordMap[positions[i][0]] = [positions[i][2], positions[i][1]]
+            }
+            that.Init_Graph()
+          })
       }
     }
 </script>

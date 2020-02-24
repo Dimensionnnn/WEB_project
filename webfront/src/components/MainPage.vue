@@ -4,21 +4,21 @@
         <div class="title">
           <span>{{title}}</span>
           <div class="line">
-            <img src="../assets/picture/line.png">
+            <img src="/static/picture/line.png">
           </div>
         </div>
         <div class="container_button">
-          <img @click="Redirect" src="../assets/picture/login.png">
+          <img @click="Redirect" src="/static/picture/login.png">
         </div>
       </div>
       <div class="huabiao">
-        <img src="../assets/picture/huabiao.png">
+        <img src="/static/picture/huabiao.png">
       </div>
       <div class="footer">
-        <img src="../assets/picture/foot.png">
+        <img src="/static/picture/foot.png">
       </div>
       <div class="bird">
-        <img src="../assets/picture/bird.png">
+        <img src="/static/picture/bird.png">
       </div>
     </div>
 </template>
@@ -141,7 +141,7 @@
     position: relative;
     width: 100%;
     height: 100%;
-    background: url('../assets/picture/bg_main.jpg') no-repeat;
+    background: url('/static/picture/bg_main.jpg') no-repeat;
     background-size: cover;
   }
   @keyframes button_bounce {

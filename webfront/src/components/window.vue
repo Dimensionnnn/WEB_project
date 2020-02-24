@@ -5,7 +5,7 @@
         <div class="img-background">
           <div class="background-title">
             <div class="title-box">
-              <img src="../assets/picture/window-title.png">
+              <img src="/static/picture/window-title.png">
             </div>
           </div>
         </div>
@@ -206,65 +206,62 @@
           return {
             ztdkTitle:'参观红色景点，牢固理想信念',
             ztdkContent:'重温党的光辉历程，讴歌党的丰功伟绩，教育引导全体干部和广大党员进一步坚定理想信念，强化党性锻炼，补足精神之钙',
-            ztdkImg:[
-              {url:require('../assets/picture/上海大学组织生活/上海大学教务处考评办党支部组织参观“遵义会议纪念馆主题展览”.jpg'),
-              content:'教务处考评办参加遵义会议纪念馆'},
-              {url:require('../assets/picture/上海大学组织生活/上海大学走进红色记忆 时刻铭记初心——教务处考评办联合党支部参观“四大”会址.jpg'),
-              content:'叫诶出考评办参观“四大”会址'}
-            ],
+            ztdkImg:[],
             ztdrTitle:'相互交流，思想碰撞，共同进步',
             ztdrContent:'主题党日是党性锤炼的“大熔炉”。在严肃的党内生活中，党员不断实现自我净化、自我完善、自我革新、自我提高。',
-            ztdrImg:[
-              {url:require('../assets/picture/上海大学组织生活/上海大学教务处考评办支部发起纪念马克思诞辰200周年读书会暨主题党日活动.jpg'),
-              content:'马克思诞辰200周年读书会'},
-              {url:require('../assets/picture/上海大学组织生活/上海大学教务考评、招毕办和经济学院党委联袂举办“五月的鲜花我和我的祖国”活动.jpg'),
-              content:'“五月的鲜花和我的祖国”主题党日'},
-              {url:require('../assets/picture/上海大学组织生活/上海大学“学讲话，守初心，谈实务”——教务考评党支部举办主题党日活动.jpg'),
-              content:'“学讲话，守初心，谈实务”主题党日'},
-              {url:require('../assets/picture/上海大学组织生活/上海大学教务处考评联合支部开展 “学思践悟新思想，改革开放再出发”为主题的主题党日活动.jpg'),
-              content:'“学思践悟新思想，改革开放再出发”'}
-            ],
+            ztdrImg:[],
             mzshTitle:'广泛讨论，凝聚共识',
             mzshContent:'民主生活会意义重大，在于它不断正风肃纪、永葆党内生机活力的重要方式。要以民主生活会为契机，直面问题，' +
               '深刻自省，补齐短板，做人民群众真正满意的共产党员',
-            mzshImg:[
-              {url:require('../assets/picture/上海大学组织生活/上海大学教务考评党支部召开民主生活会进行2018年度党员民主评议.png'),
-              content:'教务处党支部'},
-              {url:require('../assets/picture/上海大学组织生活/管理学院.jpg'),
-              content:'管理学院党总支'},
-              {url:require('../assets/picture/上海大学组织生活/计院.jpg'),
-              content:'计算机学院党总支'},
-              {url:require('../assets/picture/上海大学组织生活/图书馆.jpg'),
-              content:'图书馆党总支'}
-            ],
+            mzshImg:[],
             zzshTitle1:'深入基层，温暖他人',
             zzshContent1:'深入社会，了解社会，在实践中接受锻炼与提高，培养艰苦奋斗的品质，将理论知识内化为自身的思想认识进而提高理论水平',
-            zzsh1Img:[
-              {url:require('../assets/picture/上海大学组织生活/图形档案系社会实践.jpg'),content:'图形档案系',subject:'歌颂新时代，唱响主旋律'},
-              {url:require('../assets/picture/上海大学组织生活/社会学院社会实践.jpg'),content:'社会学院',subject:'感受沧桑巨变，坚定理想信念'},
-              {url:require('../assets/picture/上海大学组织生活/研究生社会实践.jpg'),content:'上海大学研究生实践队伍',subject:'逐梦新时代，青春勇担当'}
-            ],
+            zzsh1Img:[],
             zzshTitle2:'开会交流，永葆党的青春性与纯洁性',
             zzshContent2:'开展好党的组织生活，就可以使每一个共产党员，自觉地贯彻执行党的路线、方针和政策。同时，也可以通过组织生活，使党员经常检查和克服各种非无产阶级思想，坚定共产主义信念',
-            zzsh2Img:[
-              {url:require('../assets/picture/上海大学组织生活/外语学院组织生活会.jpg'),content:'外语学院'},
-              {url:require('../assets/picture/上海大学组织生活/理学院组织生活会.jpg'),content:'理学院'},
-              {url:require('../assets/picture/上海大学组织生活/美术学院组织生活会.jpg'),content:'美术学院'},
-              {url:require('../assets/picture/上海大学组织生活/党政办组织生活.jpg'),content:'上海大学党政办'}
-            ],
+            zzsh2Img:[],
             congressTitle:'不忘初心，牢记使命，永葆本色',
             congressContent:'三会一课在健全党的组织生活，严格党员教育管理监督，加强基层组织建设，实现党的目标任务等方面' +
               '发挥着不可替代的重要作用。坚持“三会一课”制度是严肃党内政治生活的重要内容和载体，是全面从严治党的必然要求。',
-            congressImg:[
-              {url:require('../assets/picture/上海大学组织生活/上海大学.jpg'),content:'上海大学全体党代会'},
-              {url:require('../assets/picture/上海大学组织生活/理学院党代会.jpg'),content:'理学院党代会'},
-              {url:require('../assets/picture/上海大学组织生活/通信党代会.jpg'),content:'通信学院党代会'},
-              {url:require('../assets/picture/上海大学组织生活/计算机学院党课.jpg'),content:'计算机学院党课学习'}
-            ]
+            congressImg:[]
           }
         },
+      methods:{
+          init_window:function () {
+            let that = this;
+            this.$axios.post('api/window').then(function (res) {
+               let content = res.data.data;
+               for (let i=0; i<content.length; i++){
+                 let dict = {};
+                 dict['url'] = content[i][0];
+                 dict['content'] = content[i][1];
+                 if (content[i][2] === 1){
+                   that.ztdkImg.push(dict)
+                 }
+                 else if (content[i][2] === 2){
+                   that.ztdrImg.push(dict)
+                 }
+                 else if (content[i][2] === 3){
+                   that.mzshImg.push(dict)
+                 }
+                 else if (content[i][2] === 4){
+                   that.zzsh1Img.push(dict)
+                 }
+                 else if (content[i][2] === 5){
+                   that.zzsh2Img.push(dict)
+                 }
+                 else{
+                   that.congressImg.push(dict)
+                 }
+               }
+            })
+          }
+      },
       mounted() {
           new WOW().init();
+      },
+      created() {
+          this.init_window()
       }
     }
 </script>
@@ -276,7 +273,7 @@
     top: 64px;
   }
   .img-background{
-    background: url("../assets/picture/group.jpg") no-repeat;
+    background: url("/static/picture/group.jpg") no-repeat;
     background-size: cover;
     width: 100%;
     height: 750px;

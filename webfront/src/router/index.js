@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Mainpage from '@/components/Mainpage.vue'
+import Mainpage from '@/components/MainPage.vue'
 import IndexPage from '@/components/IndexPage.vue'
 import Diplomat from '@/components/diplomat.vue'
 import Interview from '@/components/interview.vue'

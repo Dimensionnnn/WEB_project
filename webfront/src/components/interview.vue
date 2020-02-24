@@ -70,7 +70,7 @@
     </div>
     <div class="items-body" style="background: rgba(255,96,0,0.1)">
       <div class="main-wrap">
-        <p class="main-title" style="color: #cc2a1d">部分全国道德模范</p>
+        <p class="main-title" style="color: #cc2a1d">部分全国改革先锋</p>
         <div class="main-content">
           <ul>
             <div v-for="(item,index) in reform_list" :key="index">
@@ -104,51 +104,38 @@
         },
         data(){
           return {
-            medal_list:[
-              {url:require('../assets/picture/zhangfuqing.jpg'),name:'张富清',title:'深藏功与名的共和国英雄',
-              content:'和我并肩作战多年的战友，有好多都牺牲了，他们才是真正的英雄'},
-              {url:require('../assets/picture/yumin.jpg'), name:'于敏',title:'氢弹之父，国家脊梁',
-                content:'国家需要我，我一定全力以赴'},
-              {url:require('../assets/picture/shenjilan.jpg'),name:'申纪兰',title:'人民的好代表',
-                content:'要和乡亲们在一起，把根永远扎根在农村大地上'},
-              {url:require('../assets/picture/sunjiadong.jpg'), name:'孙家栋',title:'志在苍穹，星河灿烂',
-                content:'能造一辈子中国“星”，是我人生最大的心愿'},
-              {url:require('../assets/picture/liyannian.jpg'), name:'李延年',title:'抗美援朝，永葆军人本色',
-              content:'当初当兵我就做好了准备，命就交给国家了'},
-              {url:require('../assets/picture/yuanlongping.jpg'),name:'袁隆平',title:'撒播智慧，收获富足',
-              content:'中国人的饭碗要牢牢掌握在自己手中'},
-              {url:require('../assets/picture/huangxuhua.jpg'),name:'黄旭华',title:'大国重器，潜艇之父',
-              content:'我的一生属于核潜艇，属于祖国，无怨无悔'},
-              {url:require('../assets/picture/tuyouyou.jpg'),name:'屠呦呦',title:'青蒿一握，拯救多少生命',
-              content:'青蒿素研究获奖是中国科学家集体的荣誉'}
-            ],
-            moral_list:[
-              {url:require('../assets/picture/道德模范/道德模范-杜富国.jpg'),name:'杜富国',animate:'box-slide1'},
-              {url:require('../assets/picture/道德模范/道德模范-蓝连青.jpg'),name:'蓝连青',animate:'box-slide2'},
-              {url:require('../assets/picture/道德模范/道德模范-刘传健.png'),name:'刘传健',animate:'box-slide3'},
-              {url:require('../assets/picture/道德模范/道德模范-尤良英.jpg'),name:'尤良英',animate:'box-slide4'},
-              {url:require('../assets/picture/道德模范/道德模范-马旭.jpg'),name:'马旭',animate:'box-slide1'},
-              {url:require('../assets/picture/道德模范/道德模范-曲建武.jpg'),name:'曲建武',animate:'box-slide2'},
-              {url:require('../assets/picture/道德模范/道德模范-王书茂.jpg'),name:'王书茂',animate:'box-slide3'},
-              {url:require('../assets/picture/道德模范/道德模范-王红心.jpg'),name:'王红心',animate:'box-slide4'}
-            ],
-            reform_list:[
-              {url:require('../assets/picture/改革先锋/改革-马云.jpg'),name:'马云',animate:'box-slide1'},
-              {url:require('../assets/picture/改革先锋/改革-马化腾.jpg'),name:'马化腾',animate:'box-slide2'},
-              {url:require('../assets/picture/改革先锋/改革-柳传志.jpg'),name:'柳传志',animate:'box-slide3'},
-              {url:require('../assets/picture/改革先锋/改革-景海鹏.jpg'),name:'景海鹏',animate:'box-slide4'},
-              {url:require('../assets/picture/改革先锋/改革-李彦宏.jpg'),name:'李彦宏',animate:'box-slide1'},
-              {url:require('../assets/picture/改革先锋/改革-李雪健.jpg'),name:'李雪健',animate:'box-slide2'},
-              {url:require('../assets/picture/改革先锋/改革-许海峰.jpg'),name:'许海峰',animate:'box-slide3'},
-              {url:require('../assets/picture/改革先锋/改革-郭明义.jpg'),name:'郭明义',animate:'box-slide4'}
-            ]
+            medal_list:[],
+            moral_list:[],
+            reform_list:[]
           }
         },
         methods:{
-
         },
       mounted() {
           new WOW().init();
+      },
+      created() {
+          let that = this;
+          this.$axios.post('api/older').then(function (res) {
+            let content = res.data.data;
+            for (let i=0; i<content.length; i++){
+                let dict = {};
+                dict['url'] = content[i][0];
+                dict['name'] = content[i][1];
+                dict['title'] = content[i][2];
+                dict['content'] = content[i][3];
+                dict['animate'] = (i+1)%4;
+                if (content[i][4] === 1){
+                  that.medal_list.push(dict)
+                }
+                else if (content[i][4] === 2){
+                  that.moral_list.push(dict)
+                }
+                else{
+                  that.reform_list.push(dict)
+                }
+            }
+          })
       }
     }
 </script>
@@ -182,7 +169,7 @@
     height: 100%;
     box-sizing: border-box;
     padding-top: 65px;
-    background: url("../assets/picture/interview_bg.jpg") no-repeat bottom;
+    background: url("/static/picture/interview_bg.jpg") no-repeat bottom;
     background-size: cover;
   }
   .bg_cover{

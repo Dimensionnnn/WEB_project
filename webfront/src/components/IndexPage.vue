@@ -4,7 +4,7 @@
         <div class="w1330_index">
           <div class="Logo_top">
             <div class="header-title">
-              <img src="../assets/picture/title.png" class="title_picture">
+              <img src="/static/picture/title.png" class="title_picture">
             </div>
           </div>
           <div class="main-body">
@@ -90,11 +90,9 @@
               <el-col :span="12">
                 <div class="news-list">
                   <ul>
-                    <li class="news-list-item">长征5号运载火箭成功发射</li>
-                    <li class="news-list-item">中日韩领导人成都峰会顺利闭幕</li>
-                    <li class="news-list-item">中共中央政治局召开专题民主生活会</li>
-                    <li class="news-list-item">十三届全国人大三次会议将于2020年3月5日在北京召开</li>
-                    <li class="news-list-item">北斗卫星导航系统2020年全面建成</li>
+                    <li class="news-list-item" v-for="(news, index) in news_outline" :key="index">
+                      {{news}}
+                    </li>
                   </ul>
                 </div>
               </el-col>
@@ -122,7 +120,7 @@
               <el-col :span="8">
                 <div class="data-box box-slide1 wow fadeInDown">
                   <div class="data-img">
-                    <img src="../assets/picture/study.png">
+                    <img src="/static/picture/study.png">
                   </div>
                   <div class="data-content">
                     <div class="data-number">{{study_hours}}</div>
@@ -133,7 +131,7 @@
               <el-col :span="8">
                 <div class="data-box box-slide2 wow fadeInDown">
                   <div class="data-img">
-                    <img src="../assets/picture/activity.png">
+                    <img src="/static/picture/activity.png">
                   </div>
                   <div class="data-content">
                     <div class="data-number">{{activity_hours}}</div>
@@ -144,7 +142,7 @@
               <el-col :span="8">
                 <div class="data-box box-slide3 wow fadeInDown">
                   <div class="data-img">
-                    <img src="../assets/picture/score.png">
+                    <img src="/static/picture/score.png">
                   </div>
                   <div class="data-content">
                     <div class="data-number">{{score}}</div>
@@ -172,22 +170,10 @@
             study_hours:0,
             activity_hours:0,
             score:0,
-            banner:[
-              {url:require('../assets/picture/banner1.png')},
-              {url:require('../assets/picture/banner2.png')},
-              {url:require('../assets/picture/banner3.png')}
-            ],
-            card:[
-              {url:require('../assets/picture/card1.png'),text:'礼赞祖国，讴歌时代',content:'在这个伟大的伟大的新时代，祖国各方面都取得了骄人的成绩，让我们写下对祖国的赞美与祝福吧'},
-              {url:require('../assets/picture/card2.png'),text:'抒发理想，振翅远翔',content:'作为新时代的青年，我们即将成为国家建设的中流砥柱，让我们一起抒发抱负，放飞理想吧'},
-              {url:require('../assets/picture/card3.png'),text:'铭记历史，缅怀先烈',content:'我们不能忘记今天我们的美好生活是无数革命先辈抛头颅，洒热血换来的，铭记历史，缅怀先烈'}
-            ],
-            news:[
-              {url:require('../assets/picture/news.jpg'), title:'习近平会见韩国总统文在寅'},
-              {url:require('../assets/picture/news1.jpg'), title:'习近平会见日本总统安倍晋三'},
-              {url:require('../assets/picture/news2.jpg'),title:'习近平会见澳门新任行政长官贺一诚'},
-              {url:require('../assets/picture/news3.jpg'),title:'习近平视察驻澳门部队并发表演讲'}
-            ],
+            news_outline:[],
+            banner:[],
+            card:[],
+            news:[],
             special_list:[
               {title:'史海遨游', content:'通过VR让你360°游览红色景点。感受革命先辈，仁人烈士的风采与精神',command:'a'},
               {title:'重走长征路', content:'在虚拟长征地图中带领你重走长征路，不忘初心，砥砺前行',command:'b'}
@@ -216,9 +202,58 @@
         },
         methods:{
           data_init:function () {
-            this.study_hours = 128;
-            this.activity_hours = 20;
-            this.score = 468;
+            let that = this;
+            this.$axios.post('api/credit').then(function (res) {
+              let data = res.data.data;
+              that.study_hours = data[0][0];
+              that.activity_hours = data[0][1];
+              that.score = data[0][2]
+            })
+          },
+          init_card:function(){
+            let that = this;
+            this.$axios.post('api/act').then(function (res) {
+              let cards = res.data.data;
+              for (let i=0; i<cards.length; i++){
+                let dict = {};
+                dict['url'] = cards[i][0];
+                dict['text'] = cards[i][1];
+                dict['content'] = cards[i][2];
+                that.card.push(dict)
+              }
+            })
+          },
+          init_news_outline:function(){
+            let that = this;
+            this.$axios.post('api/news/outline').then(function (res) {
+              let news = res.data.data;
+              for (let i=0; i<news.length; i++) {
+                that.news_outline.push(news[i][0])
+              }
+            });
+          },
+          init_header_banner:function(){
+            let that = this;
+            this.$axios.post('api/header/banner').then(function (res) {
+              let data = res.data.data;
+              for (let i=0; i<data.length; i++){
+                let dict = {};
+                dict['url'] = data[i][0];
+                that.banner.push(dict)
+              }
+            })
+          },
+          init_news_pic:function(){
+            let that = this;
+            this.$axios.post('api/news/banner').then(function (res) {
+              let data = res.data.data;
+              for (let i=0; i<data.length; i++){
+                let dict = {};
+                dict['url'] = data[i][0];
+                dict['title'] = data[i][1];
+                that.news.push(dict)
+              }
+            })
           },
           handleCommand1:function (command) {
 
@@ -261,7 +296,10 @@
           new WOW().init();
         },
         created() {
-          this.$axios.post('/api/')
+          this.init_news_outline();
+          this.init_header_banner();
+          this.init_news_pic();
+          this.init_card()
         }
     }
 </script>
@@ -274,7 +312,7 @@
     height: 750px;
     width: 100%;
     min-width: 1400px;
-    background: url("../assets/picture/bg_index.jpg") no-repeat;
+    background: url("/static/picture/bg_index.jpg") no-repeat;
     background-position: center 0
   }
   .w1330_index{
