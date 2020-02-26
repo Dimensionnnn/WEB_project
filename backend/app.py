@@ -8,18 +8,18 @@ app = Flask(__name__, static_url_path="")
 app.config['SECRET_KEY'] = '123456'
 
 
-@app.route('/')
-def hello_world():
-    try:
-        with DB() as db:
-            sql = 'SELECT * FROM map'
-            db.execute(sql)
-            data = db.fetchall()
-            print(type(data))
-            return jsonify(errno='ok', errmsg="获取成功", data=data)
-    except Exception as e:
-        print(e)
-        return jsonify(errno='notok', errmsg="用户数据读取失败")
+# @app.route('/')
+# def hello_world():
+#     try:
+#         with DB() as db:
+#             sql = 'SELECT * FROM map'
+#             db.execute(sql)
+#             data = db.fetchall()
+#             print(type(data))
+#             return jsonify(errno='ok', errmsg="获取成功", data=data)
+#     except Exception as e:
+#         print(e)
+#         return jsonify(errno='notok', errmsg="用户数据读取失败")
 
 
 # 增加了一个不知道会不会用到的登录函数
@@ -263,7 +263,7 @@ def window():
 class DB(object):
     def __init__(self):
         self.conn = pymysql.connect(host="127.0.0.1", port=3306, user="root",
-                                    password="123456",
+                                    password="godj123!@#",
                                     database="godj")
         self.cursor = self.conn.cursor()
         # self.num = self.cos.execute()
@@ -278,4 +278,6 @@ class DB(object):
 
 
 if __name__ == '__main__':
+    from werkzeug.contrib.fixers import ProxyFix
+    app.wsgi_app = ProxyFix(app.wsgi_app)
     app.run()
