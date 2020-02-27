@@ -259,7 +259,10 @@
 
           },
           handleCommand2:function (command) {
-
+            if (command === "b"){
+              let new_url = this.$router.resolve({path:'/message'});
+              window.open(new_url.href);
+            }
           },
           handleCommand3:function (command) {
 

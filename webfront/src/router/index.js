@@ -6,6 +6,8 @@ import Diplomat from '@/components/diplomat.vue'
 import Interview from '@/components/interview.vue'
 import Modelparty from '@/components/ModelParty.vue'
 import Window from '@/components/window.vue'
+import Message from '@/components/message.vue'
+import Interview_Detail from '@/components/interview_detail.vue'
 
 Vue.use(Router);
 
@@ -50,6 +52,18 @@ export default new Router({
       path:'/window',
       name:'Window',
       component:Window,
+      meta:{index:2}
+    },
+    {
+      path:'/message',
+      name:'Message',
+      component:Message,
+      meta:{index:2}
+    },
+    {
+      path: '/interview/detail',
+      name: 'Interview_Detail',
+      component: Interview_Detail,
       meta:{index:2}
     }
   ]

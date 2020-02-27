@@ -25,7 +25,7 @@
         <div class="main-content">
           <ul>
             <div v-for="(item,index) in medal_list" :key="index">
-              <li>
+              <li @click="medal_people_click(index)">
                 <div class="img-box">
                   <img v-bind:src="item.url">
                   <el-popover placement="bottom-start" v-bind:title="item.title" width="200" trigger="hover"
@@ -100,7 +100,7 @@
     export default {
         name: "interview",
         components:{
-          partynav
+          partynav,
         },
         data(){
           return {
@@ -110,6 +110,12 @@
           }
         },
         methods:{
+          medal_people_click:function (index) {
+            this.$router.push({
+              name:'Interview_Detail',
+              params:{idname:1}
+            });
+          }
         },
       mounted() {
           new WOW().init();

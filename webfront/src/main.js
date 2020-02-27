@@ -14,10 +14,10 @@ import 'echarts-gl'
 import 'echarts/map/js/world.js'
 
 Vue.use(ElementUI);
-Vue.use(VueAxios, axios)
+Vue.use(VueAxios, axios);
 Vue.config.productionTip = false;
 Vue.prototype.$echarts = echarts;
-Vue.prototype.$axios = axios
+Vue.prototype.$axios = axios;
 
 /* eslint-disable no-new */
 new Vue({

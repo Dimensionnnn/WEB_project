@@ -8,18 +8,9 @@ app = Flask(__name__, static_url_path="")
 app.config['SECRET_KEY'] = '123456'
 
 
-# @app.route('/')
-# def hello_world():
-#     try:
-#         with DB() as db:
-#             sql = 'SELECT * FROM map'
-#             db.execute(sql)
-#             data = db.fetchall()
-#             print(type(data))
-#             return jsonify(errno='ok', errmsg="获取成功", data=data)
-#     except Exception as e:
-#         print(e)
-#         return jsonify(errno='notok', errmsg="用户数据读取失败")
+@app.route('/')
+def hello_world():
+    return jsonify(data='ok')
 
 
 # 增加了一个不知道会不会用到的登录函数
@@ -258,6 +249,33 @@ def window():
             return jsonify(errno='success', errmsg='获取成功', data=data)
     except Exception as e:
         return jsonify(errno='notok', errmsg="用户数据读取失败", data=e)
+
+
+# 获取心得体会
+@app.route('/share_think', methods=['get', 'post'])
+def think_share():
+    try:
+        with DB() as db:
+            sql = 'SELECT * FROM think_share order by time desc'
+            db.execute(sql)
+            data = db.fetchall()
+            return jsonify(errno='success', errmsg='获取成功', data=data)
+    except Exception as e:
+        return jsonify(errno='notok', errmsg="用户数据读取失败", data=e)
+
+
+# 提交心得体会
+@app.route('/share_think_send', methods=['get', 'post'])
+def think_share_send():
+    data = request.json
+    try:
+        with DB() as db:
+            sql = 'insert into think_share(name, content, time) values ("%s", "%s", "%s");' % \
+                  (data.get('name'), data.get('content'), data.get('time'))
+            db.execute(sql)
+            return jsonify(message='success', code=0)
+    except Exception as e:
+        return jsonify(message='fail', code=-1, errmsg=e)
 
 
 class DB(object):
