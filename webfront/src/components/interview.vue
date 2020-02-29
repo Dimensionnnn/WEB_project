@@ -111,10 +111,11 @@
         },
         methods:{
           medal_people_click:function (index) {
-            this.$router.push({
-              name:'Interview_Detail',
-              params:{idname:1}
+            let new_rul = this.$router.resolve({
+              path:'/interview/detail',
+              query:{index:index, type:1}
             });
+            window.open(new_rul.href)
           }
         },
       mounted() {

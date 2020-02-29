@@ -263,6 +263,10 @@
               let new_url = this.$router.resolve({path:'/message'});
               window.open(new_url.href);
             }
+            else if (command === 'd'){
+              let new_url = this.$router.resolve({path:'/exam'});
+              window.open(new_url.href)
+            }
           },
           handleCommand3:function (command) {
 

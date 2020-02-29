@@ -4,7 +4,13 @@
         title="心得感悟"
         :visible.sync="dialogVisible"
         width="30%">
-        <el-input type="textarea" :rows="4" placeholder="留下你的学习心得体会吧" v-model="textAera"></el-input>
+        <span class="content-input">请输入您的留言：</span>
+        <el-input style="margin-top: 20px" type="textarea" :rows="4" placeholder="留下你的学习心得体会吧" v-model="textAera"></el-input>
+        <div class="name-box">
+          <span>请输入您的姓名：</span>
+          <el-input class="name-input" placeholder="请输入您的姓名" v-model="name"></el-input>
+        </div>
+
         <span slot="footer" class="dialog-footer">
           <el-button @click="dialogVisible = false">取 消</el-button>
           <el-button type="primary" @click="Confirm">确 定</el-button>
@@ -62,6 +68,7 @@
             show: true,
             dialogVisible: false,
             textAera:'',  //心得体会
+            name:'',      //姓名
             Index: 1,   //当前页数
             All_page: 0,    //总页数
             cur: 0,     //当前条数,
@@ -79,9 +86,12 @@
             if (this.textAera === ''){
               this.$message.error('输入内容不能为空')
             }
+            else if (this.name === ''){
+              this.$message.error('输入姓名不能为空')
+            }
             else{
               let content = {};
-              content['name']='俞成悦';
+              content['name']= this.name;
               content['content'] = this.textAera;
               content['time'] = this.timeFormatter();
               this.$axios({
@@ -237,6 +247,24 @@
   .paginator-box{
     margin-top: 10px;
     text-align: center;
+  }
+  .name-box{
+    width: 100%;
+    margin-top: 20px;
+    display: inline-block;
+  }
+  .name-box span{
+    font-size: 15px;
+    color: #333;
+    float: left;
+  }
+  .name-input{
+    margin-top: 20px;
+    float: left;
+  }
+  .content-input{
+    color: #333;
+    font-size: 15px;
   }
 </style>
 <style>

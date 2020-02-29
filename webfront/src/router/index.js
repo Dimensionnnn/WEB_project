@@ -8,6 +8,7 @@ import Modelparty from '@/components/ModelParty.vue'
 import Window from '@/components/window.vue'
 import Message from '@/components/message.vue'
 import Interview_Detail from '@/components/interview_detail.vue'
+import Exam from '@/components/exam_header.vue'
 
 Vue.use(Router);
 
@@ -64,6 +65,12 @@ export default new Router({
       path: '/interview/detail',
       name: 'Interview_Detail',
       component: Interview_Detail,
+      meta:{index:3}
+    },
+    {
+      path:'/exam',
+      name:'Exam',
+      component:Exam,
       meta:{index:2}
     }
   ]

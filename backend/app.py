@@ -225,6 +225,21 @@ def good_thing():
         return jsonify(errno='notok', errmsg="用户数据读取失败", data=e)
 
 
+@app.route('/goodthing/detail', methods=['post', 'get'])
+def good_thing_detail():
+    try:
+        with DB() as db:
+            data = request.json
+            type = data.get('type')
+            index = data.get('index')
+            sql = 'select * from model_people where type=%d limit %d, 1;' % (type, index)
+            db.execute(sql)
+            data = db.fetchall()
+            return jsonify(errno='success', code=0, data=data)
+    except Exception as e:
+        return jsonify(errno='fail', code=-1,  data=e)
+
+
 # 获取精选评论
 @app.route('/party_comment', methods=['get', 'post'])
 def party_commment():
@@ -276,6 +291,18 @@ def think_share_send():
             return jsonify(message='success', code=0)
     except Exception as e:
         return jsonify(message='fail', code=-1, errmsg=e)
+
+
+@app.route('/get_exam', methods=['get', 'post'])
+def get_exam():
+    try:
+        with DB() as db:
+            sql = "select * from exam_option"
+            db.execute(sql)
+            data = db.fetchall()
+            return jsonify(message='success', code=0, data=data)
+    except Exception as e:
+        return jsonify(message='fail', code=-1, data=e)
 
 
 class DB(object):
