@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div style="background: #FAFAD2;">
       <div class="header">
         <div class="header-info">
           <h1>{{title}}----{{name}}</h1>
@@ -106,8 +106,4 @@
     box-shadow: 0 0 10px 5px #cdcdcd;
   }
 </style>
-<style>
-  body{
-    background: #FAFAD2;
-  }
-</style>
+

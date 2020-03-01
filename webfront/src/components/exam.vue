@@ -286,8 +286,4 @@
     color: #fff;
   }
 </style>
-<style>
-  body{
-    background: rgb(207, 216, 221);
-  }
-</style>
+

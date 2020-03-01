@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div style="background: rgb(207, 216, 221);">
       <div class="header">
         <div class="header-title">
           <h1>Go党建综合测验平台</h1>
@@ -58,10 +58,5 @@
   .header-title h1{
     font-size: 50px;
     color: #fff;
-  }
-</style>
-<style>
-  body{
-    background: rgb(207, 216, 221);
   }
 </style>

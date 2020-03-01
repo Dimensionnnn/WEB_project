@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="messageVue">
       <el-dialog
         title="心得感悟"
         :visible.sync="dialogVisible"
@@ -268,37 +268,37 @@
   }
 </style>
 <style>
-  .el-timeline-item__timestamp{
-    color: #fb1d04;
-    line-height: 1;
-    font-size: 13px;
-  }
-  .el-timeline-item__tail {
-    position: absolute;
-    left: 4px;
-    height: 100%;
-    border-left: 2px solid #fb1d04;
-  }
-  .el-card{
-    background: #fdeab6;
-    cursor: pointer;
-  }
-  .el-card:hover{
-    background: #fc692f;
-    color:#fff;
-  }
-  .el-pager li{
-    transition: all .4s;
-  }
-  .el-pager li.active{
-    background: #fb1d04;
-    color: #fff;
-    cursor: pointer;
-  }
-  .el-pager li:hover{
-    color: #fb1d04;
-  }
-  .el-pager li.active:hover{
-    color:#fff
-  }
+    .messageVue .el-timeline-item__timestamp{
+      color: #fb1d04;
+      line-height: 1;
+      font-size: 13px;
+    }
+    .messageVue .el-timeline-item__tail {
+      position: absolute;
+      left: 4px;
+      height: 100%;
+      border-left: 2px solid #fb1d04;
+    }
+    .messageVue .el-card{
+      background: #fdeab6;
+      cursor: pointer;
+    }
+    .messageVue .el-card:hover{
+      background: #fc692f;
+      color:#fff;
+    }
+    .messageVue .el-pager li{
+      transition: all .4s;
+    }
+    .messageVue .el-pager li.active{
+      background: #fb1d04;
+      color: #fff;
+      cursor: pointer;
+    }
+    .messageVue .el-pager li:hover{
+      color: #fb1d04;
+    }
+    .messageVue .el-pager li.active:hover{
+      color:#fff
+    }
 </style>
