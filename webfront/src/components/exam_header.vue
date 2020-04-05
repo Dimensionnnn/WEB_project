@@ -1,5 +1,5 @@
 <template>
-    <div style="background: rgb(207, 216, 221);">
+    <div style="background: rgb(207, 216, 221); min-width: 1400px">
       <div class="header">
         <div class="header-title">
           <h1>Go党建综合测验平台</h1>

@@ -256,7 +256,10 @@
             })
           },
           handleCommand1:function (command) {
-
+            if (command === 'a'){
+              let new_url = this.$router.resolve({path:'/red_scenery'});
+              window.open(new_url.href)
+            }
           },
           handleCommand2:function (command) {
             if (command === "b"){
