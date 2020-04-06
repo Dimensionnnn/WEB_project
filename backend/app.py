@@ -312,17 +312,10 @@ def get_red_scenery():
     type = json_data.get('type')
     try:
         with DB() as db:
-            if type == 0:
-                sql = "select * from scene"
-                db.execute(sql)
-                data = db.fetchall()
-                return jsonify(message='success', code=0, data=data)
-            else:
-                content = json_data.get('content')
-                sql = "select * from scene where title like '%"+content+"%' or '%"+content+"' or '"+content+"%';"
-                db.execute(sql)
-                data = db.fetchall()
-                return jsonify(message='success', code=0, data=data)
+            sql = "select * from scene"
+            db.execute(sql)
+            data = db.fetchall()
+            return jsonify(message='success', code=0, data=data)
     except Exception as e:
         return jsonify(message='fail', code=-1, data=e)
 

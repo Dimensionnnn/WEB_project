@@ -5,14 +5,14 @@
           <div class="title">
             <span>360°全景遨游红色景点</span>
           </div>
-          <div class="search">
-            <div class="search-input">
-              <div class="search-box">
-                <input type="text" placeholder="请输入您想搜索的景点名称" v-model="search_content"></input>
-              </div>
-            </div>
-            <button class="search_button" @click="Search">搜索景点</button>
-          </div>
+<!--          <div class="search">-->
+<!--            <div class="search-input">-->
+<!--              <div class="search-box">-->
+<!--                <input type="text" placeholder="请输入您想搜索的景点名称" v-model="search_content"></input>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--            <button class="search_button" @click="Search">搜索景点</button>-->
+<!--          </div>-->
         </div>
       </div>
       <div class="main-content">
@@ -125,7 +125,7 @@
   .title-box{
     width: 1200px;
     margin: 0 auto;
-    padding: 60px 20px;
+    padding: 110px 20px;
   }
   .title{
     text-align: center;
