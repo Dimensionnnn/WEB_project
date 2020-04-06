@@ -5,14 +5,6 @@
           <div class="title">
             <span>360°全景遨游红色景点</span>
           </div>
-<!--          <div class="search">-->
-<!--            <div class="search-input">-->
-<!--              <div class="search-box">-->
-<!--                <input type="text" placeholder="请输入您想搜索的景点名称" v-model="search_content"></input>-->
-<!--              </div>-->
-<!--            </div>-->
-<!--            <button class="search_button" @click="Search">搜索景点</button>-->
-<!--          </div>-->
         </div>
       </div>
       <div class="main-content">
@@ -53,20 +45,10 @@
           }
         },
         methods:{
-          getData: function(params){
+          getData: function(){
               let that = this;
-              let content = {};
-              if (params === undefined){
-                content['content'] = '';
-                content['type'] = 0
-              }
-              else{
-                content['content'] = params;
-                content['type'] = 1
-              }
               this.$axios({
                   method:'post',
-                  data:content,
                   url:'api/get_red_scene',
                 }).then(function (res) {
                   let data = res.data.data;
@@ -94,7 +76,7 @@
             }
             else{
               this.card_list = [];
-              that.getData(that.search_content);
+              that.getData();
             }
           }
         },
@@ -103,7 +85,7 @@
         },
         created() {
           let params = this.$route.query.content;
-          this.getData(params);
+          this.getData();
         }
     }
 </script>

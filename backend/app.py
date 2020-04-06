@@ -307,9 +307,6 @@ def get_exam():
 
 @app.route('/get_red_scene', methods=['get', 'post'])
 def get_red_scenery():
-    json_data = request.json
-    print(json_data)
-    type = json_data.get('type')
     try:
         with DB() as db:
             sql = "select * from scene"
