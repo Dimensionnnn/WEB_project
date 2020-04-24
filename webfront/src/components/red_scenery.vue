@@ -9,7 +9,8 @@
       </div>
       <div class="main-content">
         <div class="card-box">
-          <div v-for="(item,index) in card_list" :key="index">
+          <el-scrollbar style="height: 550px">
+            <div v-for="(item,index) in card_list" :key="index">
             <el-card class="box-card" @click.native="Transfer(index)">
               <div class="card-container">
                 <el-row>
@@ -30,6 +31,7 @@
               </div>
             </el-card>
           </div>
+          </el-scrollbar>
         </div>
       </div>
     </div>
@@ -63,6 +65,9 @@
           },
           Transfer:function (index) {
             if (index === 0){
+              window.location.href='http://47.111.227.79:3000'
+            }
+            if (index === 1){
               window.location.href='http://47.111.227.79:4000'
             }
           },
@@ -122,10 +127,11 @@
   }
   .main-content{
     width: 1200px;
-    min-height: 400px;
-    margin: 40px auto;
+    margin: 0 auto;
   }
   .box-card{
+    margin-top: 20px;
+    margin-bottom: 40px;
     cursor: pointer;
     transform: scaleX(1);
     transition-timing-function: cubic-bezier(0.52, 1.64, 0.37, 0.66);
@@ -136,7 +142,6 @@
   .card-box{
     width: 1000px;
     margin: 0 auto;
-    min-height: 400px;
   }
   .card-container{
     width: 100%;

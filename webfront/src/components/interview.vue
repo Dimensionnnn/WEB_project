@@ -1,93 +1,33 @@
 <template>
-  <div style="height: 100%">
-    <partynav></partynav>
-    <div class="top-banner">
-      <div class="swipper-container">
-        <div class="swipper-wrapper">
-          <div class="main_bg">
-            <div class="bg_cover">
-              <div class="content_container">
-                <div class="content-title">
-                  <span>先辈寄语</span>
+  <div class="main-bg">
+    <div class="back-btn" v-if="page_index !== length">
+      <img src="/static/picture/back.png" @click="handleBack">
+    </div>
+    <div class="go-btn" v-if="page_index !== 1">
+      <img src="/static/picture/go.png" @click="handleGo">
+    </div>
+    <div class="book preserve-3d">
+      <div v-for="(item, index) in model_people" :key="index">
+        <div class="book-page-box preserve-3d"
+             :class="[page_index<=index?'flip-animation-1':'', finish_page.indexOf(index)>-1?'flip-animation-2':'']">
+          <div class="book-page page-front">
+            <el-scrollbar style="height: 100%">
+              <div class="detail-header">
+                <div class="detail-text">
+                  <div class="detail-text-name">
+                    <div class="detail-text-name1">{{item.name}}</div>
+                  </div>
+                  <div class="detail-text-content">
+                    <div class="detail-text-content1">{{item.content}}</div>
+                  </div>
                 </div>
-                <div class="vice-title">
-                  <span>从先辈的手中接过历史的接力棒，走好我们这一代人的长征路</span>
+                <div class="img-box">
+                  <img :src="item.url">
                 </div>
               </div>
-            </div>
+              <p v-html="item.detail"></p>
+            </el-scrollbar>
           </div>
-        </div>
-      </div>
-    </div>
-    <div class="items-body" style="background: #efefef">
-      <div class="main-wrap">
-        <p class="main-title">共和国荣誉勋章获得者</p>
-        <div class="main-content">
-          <ul>
-            <div v-for="(item,index) in medal_list" :key="index">
-              <li @click="medal_people_click(index)">
-                <div class="img-box">
-                  <img v-bind:src="item.url">
-                  <el-popover placement="bottom-start" v-bind:title="item.title" width="200" trigger="hover"
-                              v-bind:content="item.content">
-                    <div class="hover-element" slot="reference">
-                      <div class="info-box">
-                        <div class="in-title-text">
-                          <span>{{item.name}}</span>
-                        </div>
-                      </div>
-                    </div>
-                  </el-popover>
-                </div>
-              </li>
-            </div>
-          </ul>
-        </div>
-      </div>
-    </div>
-    <div class="items-body">
-      <div class="main-wrap">
-        <p class="main-title">部分全国道德模范</p>
-        <div class="main-content">
-          <ul>
-            <div v-for="(item,index) in moral_list" :key="index">
-              <li>
-                <div class="img-box">
-                  <img v-bind:src="item.url">
-                  <div class="hover-element">
-                    <div class="info-box">
-                      <div class="in-title-text">
-                        <span>{{item.name}}</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </li>
-            </div>
-          </ul>
-        </div>
-      </div>
-    </div>
-    <div class="items-body" style="background: rgba(255,96,0,0.1)">
-      <div class="main-wrap">
-        <p class="main-title" style="color: #cc2a1d">部分全国改革先锋</p>
-        <div class="main-content">
-          <ul>
-            <div v-for="(item,index) in reform_list" :key="index">
-              <li>
-                <div class="img-box">
-                  <img v-bind:src="item.url">
-                  <div class="hover-element">
-                    <div class="info-box">
-                      <div class="in-title-text">
-                        <span>{{item.name}}</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </li>
-            </div>
-          </ul>
         </div>
       </div>
     </div>
@@ -95,201 +35,314 @@
 </template>
 
 <script>
-    import {WOW} from '../assets/js/wow.min.js'
-    import partynav from '@/components/partynav.vue'
     export default {
         name: "interview",
-        components:{
-          partynav,
-        },
         data(){
-          return {
-            medal_list:[],
-            moral_list:[],
-            reform_list:[]
+          return{
+            page_index: null,
+            length: null,
+            model_people:[],
+            finish_page:[]
           }
         },
-        methods:{
-          medal_people_click:function (index) {
-            let new_rul = this.$router.resolve({
-              path:'/interview/detail',
-              query:{index:index, type:1}
-            });
-            window.open(new_rul.href)
+        methods: {
+          handleGo:function () {
+            this.page_index = this.page_index - 1;
+            if (this.finish_page !== []){
+              this.finish_page.pop()
+            }
+          },
+          handleBack:function () {
+            this.finish_page.push(this.page_index);
+            this.page_index = this.page_index + 1;
           }
         },
-      mounted() {
-          new WOW().init();
-      },
-      created() {
+        mounted() {
           let that = this;
-          this.$axios.post('api/older').then(function (res) {
-            let content = res.data.data;
-            for (let i=0; i<content.length; i++){
-                let dict = {};
-                dict['url'] = content[i][0];
-                dict['name'] = content[i][1];
-                dict['title'] = content[i][2];
-                dict['content'] = content[i][3];
-                dict['animate'] = (i+1)%4;
-                if (content[i][4] === 1){
-                  that.medal_list.push(dict)
-                }
-                else if (content[i][4] === 2){
-                  that.moral_list.push(dict)
-                }
-                else{
-                  that.reform_list.push(dict)
-                }
+          this.$axios.post('api/older').then(res=>{
+            let data = res.data.data;
+            that.page_index = data.length;
+            that.length = data.length;
+            for (let i=0; i<data.length; i++){
+              let dict = {};
+              dict['url'] = data[i][0];
+              dict['name'] = data[i][1];
+              dict['title'] = data[i][2];
+              dict['content'] = data[i][3];
+              dict['detail'] = data[i][5];
+              that.model_people.push(dict)
             }
           })
-      }
+        }
     }
 </script>
 
 <style scoped>
-  .top-banner{
-    min-width: 1400px;
-    height: 620px;
-  }
-  .swipper-container{
-    height: 100%;
-    margin-left: auto;
-    margin-right: auto;
-    position: relative;
-    overflow: hidden;
-    list-style: none;
-    padding: 0;
-    z-index: 1;
-  }
-  .swipper-wrapper{
-    position: relative;
+  .detail-header{
     width: 100%;
-    height: 100%;
-    z-index: 1;
+    height: 200px;
     display: flex;
-    transition-property: transform;
-    box-sizing: content-box;
+    flex-direction: row;
   }
-  .main_bg{
-    width: 100%;
+  .detail-text{
+    width: 70%;
     height: 100%;
-    box-sizing: border-box;
-    padding-top: 65px;
-    background: url("/static/picture/interview_bg.jpg") no-repeat bottom;
-    background-size: cover;
   }
-  .bg_cover{
-    position: absolute;
+  .detail-text-name{
+    height: 50%;
     width: 100%;
-    height: 100%;
-    background: rgba(0,0,0,0.6);
   }
-  .content_container{
-    position: relative;
-    height: 100%;
-    width: 1200px;
-    margin: 0 auto;
-    min-width: 1200px;
-  }
-  .content-title{
-    padding: 144px 0 30px;
-    font-size: 50px;
-    font-weight: 500;
-    color: #ffffff;
-    text-shadow: 0 2px 9px rgba(0, 0, 0, 0.2);
-    text-align: center;
-  }
-  .content-title span{
-    letter-spacing: 60px;
-  }
-  .vice-title{
-    text-align: center;
-    font-size: 30px;
-    font-weight: 400;
-    color: #ffffff;
-    text-shadow: 0 2px 9px rgba(0, 0, 0, 0.2);
-    padding: 90px 0 24px;
-  }
-  .items-body{
-    width: 100%;
-    min-width: 1400px;
-    padding: 60px 0;
-    overflow: hidden;
-  }
-  .main-wrap{
-    width: 1200px;
-    margin: 0 auto;
-    position: relative;
-    min-width: 1200px;
-  }
-  .main-title{
-    font-size: 36px;
-    text-align: center;
+  .detail-text-name1{
+    font-size: 40px;
+    color: #343434;
     font-weight: bold;
-    line-height: 1.4em;
+    position: relative;
+    margin-left: 40px;
+    margin-top: 20px;
   }
-  .main-content{
+  .detail-text-content{
+    height: 50%;
     width: 100%;
-    height: auto;
-    margin-top: 60px;
   }
-  .main-content ul{
-    list-style: none;
-    padding: 10px 5px;
-  }
-  .main-content ul li{
-    width: 280px;
-    height: 320px;
-    box-shadow: 0 0 10px rgba(0,0,0, 0.5);
-    float: left;
-    margin-left: 16px;
-    margin-bottom: 10px;
-    border-radius: 4px;
-  }
-  .main-content ul li img{
-    width: 100%;
-    height: 100%;
-    border-radius: 4px;
+  .detail-text-content1{
+    font-size: 18px;
+    margin-left: 40px;
   }
   .img-box{
-    position: relative;
-    width: 100%;
+    width: 30%;
     height: 100%;
-    background: #e7e7e7;
   }
-  .hover-element{
-    opacity: 1;
+  .img-box img{
     width: 100%;
     height: 100%;
+  }
+  .main-bg{
+    min-width: 1400px;
+    height: 100%;
+    background-image: url("/static/picture/model_people_bg.jpg");
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+  }
+  .back-btn{
+    width: 70px;
+    height: 70px;
+    float: left;
+    position: absolute;
+    top: 45%;
+    left: 40px;
+    background: #ddd;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+  }
+  .back-btn img{
+    width: 50px;
+    height: 50px;
+  }
+  .go-btn{
+    width: 70px;
+    height: 70px;
+    position: absolute;
+    float: right;
+    right: 40px;
+    top: 45%;
+    background: #ddd;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+  }
+  .go-btn img{
+    width: 50px;
+    height: 50px;
+  }
+  .book {
+    position: absolute;
+    width: 600px;
+    height:870px;
+    left: 50%;
+    background-color: #fff;
+    border-bottom: 10px #8c939d solid;
+    -webkit-transform: rotateX(30deg);
+    -ms-transform: rotateX(30deg);
+    -o-transform: rotateX(30deg);
+    transform: rotateX(30deg);
+  }
+  .preserve-3d {
+    -webkit-transform-style: preserve-3d;
+    -moz-transform-style: preserve-3d;
+    -ms-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+  }
+  .book-page {
     position: absolute;
     top: 0;
     left: 0;
-    background: rgba(14,22,32,0.5);
-    transition: all .4s;
-    cursor: pointer;
+    width: 600px;
+    height: 870px;
+    border: 1px solid #8c939d;
+    padding: 10px;
+    background: #fff;
   }
-  .hover-element:hover{
-    opacity: 0;
+  .book-page div{
+    backface-visibility: hidden;
   }
-  .info-box{
-    top: 50%;
-    text-align: center;
-    position: relative;
-    transform: translateY(-50%);
+  .book-page-box {
+    -webkit-transform-origin: 0 50%;
+    -moz-transform-origin: 0 50%;
+    -ms-transform-origin: 0 50%;
+    -o-transform-origin: 0 50%;
+    transform-origin: 0 50%;
+    -webkit-transform: rotateY(0deg);
+    -ms-transform: rotateY(0deg);
+    -o-transform: rotateY(0deg);
+    transform: rotateY(0deg);
   }
-  .in-title-text{
+  .preserve-3d {
+    -webkit-transform-style: preserve-3d;
+    -moz-transform-style: preserve-3d;
+    -ms-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+  }
+  @keyframes flipBook1 {
+    0% {
+      -webkit-transform: rotateY(0deg);
+      -ms-transform: rotateY(0deg);
+      -o-transform: rotateY(0deg);
+      transform: rotateY(0deg);
+    }
+    100% {
+      -webkit-transform: rotateY(-175deg);
+      -ms-transform: rotateY(-175deg);
+      -o-transform: rotateY(-175deg);
+      transform: rotateY(-175deg);
+    }
+  }
 
+  /* Firefox */
+  @-moz-keyframes flipBook1 {
+     0% {
+      -webkit-transform: rotateY(0deg);
+      -ms-transform: rotateY(0deg);
+      -o-transform: rotateY(0deg);
+      transform: rotateY(0deg);
+    }
+    100% {
+      -webkit-transform: rotateY(-175deg);
+      -ms-transform: rotateY(-175deg);
+      -o-transform: rotateY(-175deg);
+      transform: rotateY(-175deg);
+    }
   }
-  .in-title-text span{
-    color: rgba(255, 255, 255, 0.85);
-    position: relative;
-    font-size: 20px;
-    line-height: 28px;
-    width: 100%;
-    padding: 0 41px;
-    box-sizing: border-box;
-    overflow: hidden;
-    text-overflow: ellipsis;
+
+  /* Safari and Chrome */
+  @-webkit-keyframes flipBook1 {
+    0% {
+      -webkit-transform: rotateY(0deg);
+      -ms-transform: rotateY(0deg);
+      -o-transform: rotateY(0deg);
+      transform: rotateY(0deg);
+    }
+     100% {
+      -webkit-transform: rotateY(-175deg);
+      -ms-transform: rotateY(-175deg);
+      -o-transform: rotateY(-175deg);
+      transform: rotateY(-175deg);
+    }
+  }
+
+  /* Opera */
+  @-o-keyframes flipBook1 {
+     0% {
+      -webkit-transform: rotateY(0deg);
+      -ms-transform: rotateY(0deg);
+      -o-transform: rotateY(0deg);
+      transform: rotateY(0deg);
+    }
+    100% {
+      -webkit-transform: rotateY(-175deg);
+      -ms-transform: rotateY(-175deg);
+      -o-transform: rotateY(-175deg);
+      transform: rotateY(-175deg);
+    }
+  }
+  @keyframes flipBook2 {
+    0% {
+      -webkit-transform: rotateY(-175deg);
+      -ms-transform: rotateY(-175deg);
+      -o-transform: rotateY(-175deg);
+      transform: rotateY(-175deg);
+    }
+    100% {
+      -webkit-transform: rotateY(0deg);
+      -ms-transform: rotateY(0deg);
+      -o-transform: rotateY(0deg);
+      transform: rotateY(0deg);
+    }
+  }
+
+  /* Firefox */
+  @-moz-keyframes flipBook2 {
+    0% {
+      -webkit-transform: rotateY(-175deg);
+      -ms-transform: rotateY(-175deg);
+      -o-transform: rotateY(-175deg);
+      transform: rotateY(-175deg);
+    }
+    100% {
+      -webkit-transform: rotateY(0deg);
+      -ms-transform: rotateY(0deg);
+      -o-transform: rotateY(0deg);
+      transform: rotateY(0deg);
+    }
+  }
+
+  /* Safari and Chrome */
+  @-webkit-keyframes flipBook2 {
+     0% {
+      -webkit-transform: rotateY(-175deg);
+      -ms-transform: rotateY(-175deg);
+      -o-transform: rotateY(-175deg);
+      transform: rotateY(-175deg);
+    }
+    100% {
+      -webkit-transform: rotateY(0deg);
+      -ms-transform: rotateY(0deg);
+      -o-transform: rotateY(0deg);
+      transform: rotateY(0deg);
+    }
+  }
+
+  /* Opera */
+  @-o-keyframes flipBook2 {
+     0% {
+      -webkit-transform: rotateY(-175deg);
+      -ms-transform: rotateY(-175deg);
+      -o-transform: rotateY(-175deg);
+      transform: rotateY(-175deg);
+    }
+    100% {
+      -webkit-transform: rotateY(0deg);
+      -ms-transform: rotateY(0deg);
+      -o-transform: rotateY(0deg);
+      transform: rotateY(0deg);
+    }
+  }
+  .flip-animation-1 {
+    animation: flipBook1 8s forwards;
+    -moz-animation: flipBook1 8s forwards; /* Firefox */
+    -webkit-animation: flipBook1 8s forwards; /* Safari and Chrome */
+    -o-animation: flipBook1 8s forwards; /* Opera */
+  }
+
+  .flip-animation-2 {
+    animation: flipBook2 8s forwards;
+    -moz-animation: flipBook2 8s forwards; /* Firefox */
+    -webkit-animation: flipBook2 8s forwards; /* Safari and Chrome */
+    -o-animation: flipBook2 8s forwards; /* Opera */
   }
 </style>

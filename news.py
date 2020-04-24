@@ -109,6 +109,7 @@ def get_date_list(beginDate, endDate):
 
     return data
 
+
 if __name__ == '__main__':
 
     # 输入起止日期，爬取之间的新闻
@@ -116,7 +117,7 @@ if __name__ == '__main__':
     endDate = input('请输入结束日期:')
     data = get_date_list(beginDate, endDate)
     dbname = "news_outline"
-    conn = pymysql.connect(host="47.111.227.79", port=3306,user='root', password='godj123!@#',db='godj', charset='utf8')
+    conn = pymysql.connect(host="47.111.227.79", port=3306, user='root', password='godj123!@#', db='godj', charset='utf8')
     cursor = conn.cursor()
     for d in data:
         year = str(d.year)

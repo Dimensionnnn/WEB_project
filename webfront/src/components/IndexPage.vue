@@ -13,7 +13,7 @@
                 <el-row>
                   <el-col :span="6">
                     <el-dropdown @command="handleCommand1">
-                      <span class="el-dropdown-link">特色汇</span>
+                      <span class="el-dropdown-link">全景旅游</span>
                       <el-dropdown-menu slot="dropdown">
                         <el-dropdown-item v-for="(list, index) in special_list" :key="index" :command="list.command">
                           <div class="drop-down-box">
@@ -74,7 +74,7 @@
               </el-carousel>
             </div>
             <div class="divider1">
-              高层动态
+              新闻动态
             </div>
             <el-row>
               <el-col :span="12">
@@ -89,11 +89,14 @@
               </el-col>
               <el-col :span="12">
                 <div class="news-list">
-                  <ul>
-                    <li class="news-list-item" v-for="(news, index) in news_outline" :key="index">
-                      {{news}}
-                    </li>
-                  </ul>
+                  <el-scrollbar style="width: 100%; height: 100%">
+                    <ul>
+                      <li class="news-list-item" v-for="(news, index) in news_outline" :key="index"
+                          @click="handleNewsClick(news.id)">
+                        {{news.title}}
+                      </li>
+                    </ul>
+                  </el-scrollbar>
                 </div>
               </el-col>
             </el-row>
@@ -182,8 +185,7 @@
               {title:'有声故事书', content:'让"小精灵"带你一起品读历史，了解一个个了不起成就的背后不为人知故事',command:'a'},
               {title:'心得分享',content:'与志同道合的小伙伴一起交流学习，共同进步',command:'b'},
               {title:'在线学习',content:'在线学习，课程节奏掌控自如',command:'c'},
-              {title:'模拟测验',content:'智能组卷，测一测自己学习的成果吧',command:'d'},
-              {title:'在线solo',content:'和小伙伴们比试比试谁学得更好',command:'e'}
+              {title:'模拟测验',content:'智能组卷，测一测自己学习的成果吧',command:'d'}
             ],
             personal_area:[
               {title:'学习计划',content:'自定义学习计划，我的学习我做主',command:'a'},
@@ -228,7 +230,11 @@
             this.$axios.post('api/news/outline').then(function (res) {
               let news = res.data.data;
               for (let i=0; i<news.length; i++) {
-                that.news_outline.push(news[i][0])
+                let dict = {};
+                dict['title'] = news[i][1];
+                dict['content'] = news[i][2];
+                dict['id'] = news[i][0];
+                that.news_outline.push(dict)
               }
             });
           },
@@ -291,6 +297,15 @@
               let new_url = this.$router.resolve({path:'/window'});
               window.open(new_url.href)
             }
+          },
+          handleNewsClick:function (index) {
+            const new_href = this.$router.resolve({
+              path: '/news',
+              query: {
+                id: index
+              }
+            });
+            window.open(new_href.href)
           }
         },
       watch:{
@@ -398,6 +413,9 @@
     font-weight: bold;
     position: relative;
     letter-spacing: 0.6px;
+  }
+  /deep/.el-scrollbar__wrap {
+    overflow-x: hidden;
   }
   .el-dropdown-link{
     text-decoration: none;
@@ -519,7 +537,7 @@
     top: 185px;
   }
   .news-list{
-    width: 300px;
+    width: 500px;
     height: 385px;
     position: absolute;
     margin-left: 46px;

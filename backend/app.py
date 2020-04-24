@@ -41,12 +41,26 @@ def login():
 def get_news_outline():
     try:
         with DB() as db:
-            sql = 'select * from news_outline'
+            sql = 'select * from news_outline order by id desc limit 20'
             db.execute(sql)
             data = db.fetchall()
             return jsonify(errno='suceess', errmsg='获取成功', data=data)
     except Exception as e:
         return jsonify(error='error', errmsg='获取失败', data=e)
+
+
+@app.route('/news/outline/detail', methods=['get', 'post'])
+def get_news_outline_detail():
+    try:
+        data = request.json
+        id = data.get('id')
+        with DB() as db:
+            sql = "select * from news_outline where id=%d" % id
+            db.execute(sql)
+            data = db.fetchall()
+            return jsonify(errno='success', code=0, errmsg='获取成功', data=data)
+    except Exception as e:
+        return jsonify(errno='error', errmsg='获取失败', code=-1,  data=e)
 
 
 # 读取新闻图片

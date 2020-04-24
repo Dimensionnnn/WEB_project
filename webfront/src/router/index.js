@@ -7,9 +7,9 @@ import Interview from '@/components/interview.vue'
 import Modelparty from '@/components/ModelParty.vue'
 import Window from '@/components/window.vue'
 import Message from '@/components/message.vue'
-import Interview_Detail from '@/components/interview_detail.vue'
 import Exam from '@/components/exam_header.vue'
 import RedScenery from '@/components/red_scenery.vue'
+import News from '@/components/news_detail.vue'
 
 Vue.use(Router);
 
@@ -85,15 +85,6 @@ export default new Router({
       }
     },
     {
-      path: '/interview/detail',
-      name: 'Interview_Detail',
-      component: Interview_Detail,
-      meta:{
-        index:3,
-        title:'前辈寄语'
-      }
-    },
-    {
       path:'/exam',
       name:'Exam',
       component:Exam,
@@ -109,6 +100,15 @@ export default new Router({
       meta:{
         index:2,
         title:'景点游览'
+      }
+    },
+    {
+      path: '/news',
+      name: 'News',
+      component: News,
+      meta: {
+        index:2,
+        title: '新闻详情'
       }
     }
   ]
