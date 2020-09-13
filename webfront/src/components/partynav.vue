@@ -2,7 +2,7 @@
     <div id="sp-header">
       <div class="header-wrapper">
         <div class="header-left">
-          <img src="/static/picture/logo-left.png" class="logo-left">
+          <img src="/static/picture/nav_title.png" class="logo-left">
           <div class="header-search">
             <img class="i-search" src="/static/picture/search.png">
             <input class="input-search" placeholder="输入您想要搜索的内容"></input>
@@ -59,10 +59,10 @@
     box-sizing: border-box;
   }
   .logo-left{
-    height: 80px;
+    height: 50px;
     position: absolute;
-    left: -6px;
-    top: -10px;
+    left: 20px;
+    top: 4px;
   }
   .header-search{
     width: 401px;

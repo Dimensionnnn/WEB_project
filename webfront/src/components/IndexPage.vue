@@ -362,10 +362,11 @@
     margin-top: -142px;
   }
   .title_picture{
-    width: 800px;
-    height: 666px;
-    position: absolute;
-    right: 218px;
+    width: 600px;
+    height: 100px;
+    margin: 0 auto;
+    margin-top: 183px;
+    margin-left: -20px;
   }
   .main-body{
     width: 100%;

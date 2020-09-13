@@ -28,7 +28,7 @@
         name: "MainPage",
         data(){
           return {
-            title: "“Go党建”红色文化综合服务平台"
+            title: "“Cloud党建”学习驿站"
           }
         },
       methods:{
