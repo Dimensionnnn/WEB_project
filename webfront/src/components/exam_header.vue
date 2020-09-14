@@ -2,7 +2,7 @@
     <div style="background: rgb(207, 216, 221); min-width: 1400px">
       <div class="header">
         <div class="header-title">
-          <h1>Go党建综合测验平台</h1>
+          <h1>Cloud党建综合测验平台</h1>
         </div>
       </div>
       <transition name="el-fade-in-linear">
