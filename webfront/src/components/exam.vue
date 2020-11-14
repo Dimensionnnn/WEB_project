@@ -20,9 +20,16 @@
                 </div>
                 <div class="exam-box2">
                   <ul>
-                    <li @click="Transfer1" v-for="(item,index) in paper_list_1">
-                      <a href="#">{{item.title}}</a>
-                      <i>{{item.time}}</i>
+                    <li @click="Transfer2" v-for="(item,index) in paper_list_1">
+                      <div class="card-container">
+                        <div class="exam-title">
+                          <a href="#">{{item.title}}</a>
+                          <i>{{item.time}}</i>
+                        </div>
+                        <div class="hot-logo" v-if="item.hot===1">
+                          <div class="hot-logo-img"></div>
+                        </div>
+                      </div>
                     </li>
                   </ul>
                 </div>
@@ -47,8 +54,15 @@
                 <div class="exam-box2">
                   <ul>
                     <li @click="Transfer2" v-for="(item,index) in paper_list_2">
-                      <a href="#">{{item.title}}</a>
-                      <i>{{item.time}}</i>
+                      <div class="card-container">
+                        <div class="exam-title">
+                          <a href="#">{{item.title}}</a>
+                          <i>{{item.time}}</i>
+                        </div>
+                        <div class="hot-logo" v-if="item.hot===1">
+                          <div class="hot-logo-img"></div>
+                        </div>
+                      </div>
                     </li>
                   </ul>
                 </div>
@@ -72,9 +86,16 @@
                 </div>
                 <div class="exam-box2">
                   <ul>
-                    <li @click="Transfer2" v-for="(item,index) in paper_list_2">
-                      <a href="#">{{item.title}}</a>
-                      <i>{{item.time}}</i>
+                    <li @click="Transfer2" v-for="(item,index) in paper_list_3">
+                      <div class="card-container">
+                        <div class="exam-title">
+                          <a href="#">{{item.title}}</a>
+                          <i>{{item.time}}</i>
+                        </div>
+                        <div class="hot-logo" v-if="item.hot===1">
+                          <div class="hot-logo-img"></div>
+                        </div>
+                      </div>
                     </li>
                   </ul>
                 </div>
@@ -95,14 +116,19 @@
        data(){
           return{
             paper_list_1:[
-              {title: '2019年入党积极分子考试题目', time:'2019-10-24'},
-              {title: '2018年入党积极分子考试题目', time:'2019-09-12'}
+              {title: '2019年入党积极分子考试题目', time:'2020-03-24', hot: 1},
+              {title: '2018年入党积极分子考试题目', time:'2020-09-12', hot: 0}
             ],
             paper_list_2:[
-              {title:'党史测验题1', time:'2019-9-28'}
+              {title:'党史测验题1', time:'2020-09-28', hot: 1},
+              {title:'党史测验题2', time:'2020-10-12', hot: 0},
+              {title:'党史测验题3', time:'2020-10-25', hot: 1},
+              {title:'党史测验题', time:'2020-11-02', hot: 0}
             ],
             paper_list_3:[
-              {title:'章节1测验题', time:'2019-10-21'}
+              {title:'章节1测验题', time:'2020-10-21',hot: 1},
+              {title:'章节2测验题',time:'2020-11-03', hot: 1},
+              {title:'章节3测验题',time:'2020-11-25', hot: 0}
             ]
           }
        },
@@ -287,6 +313,31 @@
   .footer a:hover{
     background: #379be7;
     color: #fff;
+  }
+  .card-container{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+  .exam-title{
+    width: 80%;
+    height: 100%;
+  }
+  .hot-logo{
+    width: 20%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .hot-logo-img{
+    width: 40px;
+    height: 40px;
+    background: url("/static/picture/hot.gif") no-repeat center center;
+    background-size: cover;
   }
 </style>
 
