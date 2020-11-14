@@ -20,7 +20,7 @@
                 </div>
                 <div class="exam-box2">
                   <ul>
-                    <li @click="Transfer2" v-for="(item,index) in paper_list_1">
+                    <li @click="Transfer1" v-for="(item,index) in paper_list_1">
                       <div class="card-container">
                         <div class="exam-title">
                           <a href="#">{{item.title}}</a>
