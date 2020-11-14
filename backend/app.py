@@ -311,13 +311,24 @@ def think_share_send():
 def get_exam():
     try:
         with DB() as db:
-            sql = "select * from exam_option"
+            sql = "select * from exam_option where type=1"
             db.execute(sql)
             data = db.fetchall()
             return jsonify(message='success', code=0, data=data)
     except Exception as e:
         return jsonify(message='fail', code=-1, data=e)
 
+
+@app.route('/get_else_exam', methods=['get', 'post'])
+def get_else_exam():
+    try:
+        with DB() as db:
+            sql = "select * from exam_option where type=2"
+            db.execute(sql)
+            data = db.fetchall()
+            return jsonify(message='success', code=0, data=data)
+    except Exception as e:
+        return jsonify(message='fail', code=-1, data=e)
 
 @app.route('/get_red_scene', methods=['get', 'post'])
 def get_red_scenery():

@@ -20,14 +20,14 @@
                 </div>
                 <div class="exam-box2">
                   <ul>
-                    <li @click="Transfer" v-for="(item,index) in paper_list_1">
+                    <li @click="Transfer1" v-for="(item,index) in paper_list_1">
                       <a href="#">{{item.title}}</a>
                       <i>{{item.time}}</i>
                     </li>
                   </ul>
                 </div>
                 <div class="footer">
-                  <a href="#" @click="Transfer">随机练习</a>
+                  <a href="#" @click="Transfer1">随机练习</a>
                 </div>
               </li>
               <li>
@@ -46,14 +46,14 @@
                 </div>
                 <div class="exam-box2">
                   <ul>
-                    <li @click="Transfer" v-for="(item,index) in paper_list_2">
+                    <li @click="Transfer2" v-for="(item,index) in paper_list_2">
                       <a href="#">{{item.title}}</a>
                       <i>{{item.time}}</i>
                     </li>
                   </ul>
                 </div>
                 <div class="footer">
-                  <a href="#" @click="Transfer">随机练习</a>
+                  <a href="#" @click="Transfer2">随机练习</a>
                 </div>
               </li>
               <li>
@@ -72,14 +72,14 @@
                 </div>
                 <div class="exam-box2">
                   <ul>
-                    <li @click="Transfer" v-for="(item,index) in paper_list_2">
+                    <li @click="Transfer2" v-for="(item,index) in paper_list_2">
                       <a href="#">{{item.title}}</a>
                       <i>{{item.time}}</i>
                     </li>
                   </ul>
                 </div>
                 <div class="footer">
-                  <a href="#" @click="Transfer">随机练习</a>
+                  <a href="#" @click="Transfer2">随机练习</a>
                 </div>
               </li>
             </ul>
@@ -107,8 +107,11 @@
           }
        },
       methods:{
-         Transfer:function () {
-           this.$emit('child-event', '这是子组件信息')
+         Transfer1:function () {
+           this.$emit('child-event', '1')
+         },
+         Transfer2:function () {
+           this.$emit('child-event', '2')
          }
       }
     }

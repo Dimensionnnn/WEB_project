@@ -57,6 +57,54 @@
             answer_visible:[]
           }
         },
+      props:{
+         parentmsg:{
+           type: String,
+           required: true
+         }
+      },
+      watch:{
+        parentmsg(val){
+          if (val === '1'){
+            let that = this;
+            this.$axios.post('api/get_exam').then(function (res) {
+              let content = res.data.data;
+              for (let i=0; i<content.length; i++){
+                let dict = {};
+                dict['id'] = content[i][0];
+                dict['title'] = content[i][1];
+                dict['A'] = content[i][2];
+                dict['B'] = content[i][3];
+                dict['C'] = content[i][4];
+                dict['D'] = content[i][5];
+                dict['answer'] = content[i][6];
+                dict['select'] = '';
+                that.option_exam.push(dict);
+                that.answer_visible.push(false)
+              }
+            })
+          }
+          if (val === '2'){
+            let that = this;
+            this.$axios.post('api/get_else_exam').then(function (res) {
+              let content = res.data.data;
+              for (let i=0; i<content.length; i++){
+                let dict = {};
+                dict['id'] = content[i][0];
+                dict['title'] = content[i][1];
+                dict['A'] = content[i][2];
+                dict['B'] = content[i][3];
+                dict['C'] = content[i][4];
+                dict['D'] = content[i][5];
+                dict['answer'] = content[i][6];
+                dict['select'] = '';
+                that.option_exam.push(dict);
+                that.answer_visible.push(false)
+              }
+            })
+          }
+        }
+      },
       methods:{
           Save_test:function(index){
             this.$message({
@@ -107,24 +155,7 @@
             this.dialogVisible = false;
           }
       },
-        created() {
-          let that = this;
-          this.$axios.post('api/get_exam').then(function (res) {
-            let content = res.data.data;
-            for (let i=0; i<content.length; i++){
-              let dict = {};
-              dict['id'] = content[i][0];
-              dict['title'] = content[i][1];
-              dict['A'] = content[i][2];
-              dict['B'] = content[i][3];
-              dict['C'] = content[i][4];
-              dict['D'] = content[i][5];
-              dict['answer'] = content[i][6];
-              dict['select'] = '';
-              that.option_exam.push(dict);
-              that.answer_visible.push(false)
-            }
-          })
+        created(){
         }
     }
 </script>

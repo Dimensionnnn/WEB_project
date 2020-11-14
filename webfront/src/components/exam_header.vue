@@ -9,7 +9,7 @@
         <exam @child-event="ParentEvent" v-show="contextShow"></exam>
       </transition>
       <transition name="el-fade-in">
-        <exam_detail v-show="examShow"></exam_detail>
+        <exam_detail :parentmsg="examId" v-show="examShow"></exam_detail>
       </transition>
     </div>
 </template>
@@ -25,14 +25,15 @@
         },
       data(){
           return {
+            examId: '',
             contextShow: true,
             examShow:false
           }
       },
       methods:{
-          ParentEvent:function (data) {
-            console.log(data);
-            this.contextShow = false;
+          ParentEvent:function (data){
+            this.examId = data
+            this.contextShow = false
             this.examShow = true
           }
       }
